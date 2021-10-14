@@ -3,6 +3,7 @@ package com.studio.sevenapp.todolist.components
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.lazy.GridCells
 import androidx.compose.foundation.lazy.LazyVerticalGrid
+import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 
@@ -10,15 +11,15 @@ import androidx.compose.ui.tooling.preview.Preview
 @Composable
 fun GridViewLayout(
     stringList: List<String>
-){
+) {
     LazyVerticalGrid(
         cells = GridCells.Fixed(2),
         content = {
-            items(stringList.size){
+            items(items = stringList, itemContent = {
                 GroupTask(
-                    text = stringList[it]
+                    text = it
                 )
-            }
+            })
         }
     )
 }
@@ -28,7 +29,7 @@ fun GridViewLayout(
     showBackground = true
 )
 @Composable
-fun PreviewGridView(){
+fun PreviewGridView() {
     val stringList = listOf("Personal", "Home", "Work", "University", "Study")
     GridViewLayout(stringList = stringList)
 }
