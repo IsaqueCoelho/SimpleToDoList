@@ -9,7 +9,7 @@ import androidx.compose.ui.tooling.preview.Preview
 
 @ExperimentalFoundationApi
 @Composable
-fun GridViewLayout(
+fun GridViewComponent(
     stringList: List<String>
 ) {
     LazyVerticalGrid(
@@ -31,5 +31,5 @@ fun GridViewLayout(
 @Composable
 fun PreviewGridView() {
     val stringList = listOf("Personal", "Home", "Work", "University", "Study")
-    GridViewLayout(stringList = stringList)
+    GridViewComponent(stringList = stringList)
 }

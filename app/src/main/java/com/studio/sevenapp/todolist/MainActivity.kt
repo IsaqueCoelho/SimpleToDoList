@@ -4,23 +4,25 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.rounded.Add
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.studio.sevenapp.todolist.components.GridViewComponent
 import com.studio.sevenapp.todolist.ui.theme.TODoListTheme
 
 class MainActivity : ComponentActivity() {
+    @ExperimentalFoundationApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -32,6 +34,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+@ExperimentalFoundationApi
 @Composable
 fun ScaffoldContent() {
     Scaffold(
@@ -54,19 +57,21 @@ fun ScaffoldContent() {
                 },
                 content = {
                     Icon(
-                        imageVector = Icons.Default.Add,
-                        contentDescription = "Add Button"
+                        imageVector = Icons.Rounded.Add,
+                        contentDescription = "Add Button",
+                        tint = Color.White
                     )
                 }
             )
         },
         floatingActionButtonPosition = FabPosition.End,
         content = {
-            Greeting("Android")
+            GridViewComponent(emptyList())
         }
     )
 }
 
+@ExperimentalFoundationApi
 @Preview(showBackground = true)
 @Composable
 fun PreviewScaffoldContent() {
