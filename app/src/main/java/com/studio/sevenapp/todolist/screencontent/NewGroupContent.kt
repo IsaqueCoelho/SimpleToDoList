@@ -1,4 +1,4 @@
-package com.studio.sevenapp.todolist.components
+package com.studio.sevenapp.todolist.screencontent
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -9,10 +9,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.studio.sevenapp.todolist.ui.theme.TODoListTheme
 
 @Composable
-fun NewTaskForm() {
+fun NewGroupContent(navController: NavHostController) {
     Scaffold(
         topBar = {
             Text(
@@ -41,7 +43,8 @@ fun NewTaskForm() {
                             text = "Qual o nome desse grupo",
                             modifier = Modifier.fillMaxWidth(),
                             textAlign = TextAlign.Center
-                        ) },
+                        )
+                    },
                     modifier = Modifier.fillMaxWidth()
                 )
             }
@@ -66,8 +69,9 @@ fun NewTaskForm() {
     showBackground = true
 )
 @Composable
-fun PreviewNewTaskForm() {
+fun PreviewNewGroupContent() {
     TODoListTheme {
-        NewTaskForm()
+        val navController = rememberNavController()
+        NewGroupContent(navController)
     }
 }
