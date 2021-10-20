@@ -13,6 +13,9 @@ import kotlinx.coroutines.launch
 class GroupTaskViewModel : ViewModel() {
 
     val groupListMS = mutableStateOf<List<Group>>(listOf())
+    val groupByIdMS = mutableStateOf<Group?>(null)
+
+    private val db = Firebase.firestore
 
     init {
         viewModelScope.launch {
@@ -23,16 +26,27 @@ class GroupTaskViewModel : ViewModel() {
     private fun getGroup() {
         val transitoryData = mutableListOf<Group>()
 
-        val db = Firebase.firestore
         db.collection("stack")
             .get()
             .addOnSuccessListener { result ->
                 for (document in result) {
                     transitoryData.add(
-                        document.toObject<Group>()
+                        document.toObject<Group>().copy(id = document.id)
                     )
                 }
                 groupListMS.value = transitoryData.toList()
+            }
+            .addOnFailureListener { exception ->
+                Log.e("HomeContent", "Error getting documents.", exception)
+            }
+    }
+
+    fun getGroupById(groupId: String){
+        db.collection("stack")
+            .document(groupId)
+            .get()
+            .addOnSuccessListener { result ->
+                groupByIdMS.value = result.toObject<Group>()
             }
             .addOnFailureListener { exception ->
                 Log.e("HomeContent", "Error getting documents.", exception)

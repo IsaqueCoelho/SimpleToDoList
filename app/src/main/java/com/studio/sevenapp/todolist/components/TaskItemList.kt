@@ -6,14 +6,15 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.studio.sevenapp.todolist.model.Task
 
 @Composable
 fun TaskItemList(
-    taskList: List<String>
-){
-    LazyColumn(modifier = Modifier.fillMaxWidth()){
+    taskList: List<Task>
+) {
+    LazyColumn(modifier = Modifier.fillMaxWidth()) {
         items(items = taskList, itemContent = {
-            TaskItem(text = it)
+            TaskItem(task = it)
         })
     }
 }
@@ -22,7 +23,11 @@ fun TaskItemList(
     showBackground = true
 )
 @Composable
-fun PreviewItemList(){
-    val taskList = listOf("Task 1", "Task 2", "Task 3")
+fun PreviewItemList() {
+    val taskList = listOf(
+        Task(name = "Task 1"),
+        Task(name = "Task 2"),
+        Task(name = "Task 3")
+    )
     TaskItemList(taskList = taskList)
 }

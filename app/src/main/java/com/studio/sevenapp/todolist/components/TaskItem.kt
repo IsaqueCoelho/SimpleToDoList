@@ -12,10 +12,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.studio.sevenapp.todolist.model.Task
 
 @Composable
 fun TaskItem(
-    text: String
+    task: Task
 ) {
     Row(
         modifier = Modifier
@@ -23,7 +24,7 @@ fun TaskItem(
             .padding(8.dp),
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        Text(text = text)
+        Text(text = task.name)
         TaskItemCheckbox()
     }
 }
@@ -42,5 +43,5 @@ fun TaskItemCheckbox() {
 )
 @Composable
 fun PreviewTaskItem() {
-    TaskItem(text = "Take out the trash")
+    TaskItem(task = Task(name = "Take out the trash"))
 }

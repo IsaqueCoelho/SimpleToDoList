@@ -14,6 +14,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.studio.sevenapp.todolist.components.TaskItemList
+import com.studio.sevenapp.todolist.model.Task
 import com.studio.sevenapp.todolist.navigations.Screen
 import com.studio.sevenapp.todolist.ui.theme.TODoListTheme
 import com.studio.sevenapp.todolist.ui.theme.Teal200
@@ -21,7 +22,7 @@ import com.studio.sevenapp.todolist.ui.theme.Teal200
 @Composable
 fun NewTaskStackContent(navController: NavHostController, groupName: String) {
 
-    val taskList: MutableList<String> = mutableListOf()
+    val taskList: MutableList<Task> = mutableListOf()
 
     Scaffold(
         topBar = {
@@ -46,7 +47,7 @@ fun NewTaskStackContent(navController: NavHostController, groupName: String) {
 }
 
 @Composable
-fun NewTaskStackForm(navController: NavHostController, taskList: MutableList<String>) {
+fun NewTaskStackForm(navController: NavHostController, taskList: MutableList<Task>) {
     Column {
         Row(
             Modifier.fillMaxWidth(),
@@ -61,7 +62,11 @@ fun NewTaskStackForm(navController: NavHostController, taskList: MutableList<Str
             )
 
             IconButton(
-                onClick = { taskList.add(text) }
+                onClick = {
+                    taskList.add(
+                        Task(name = text)
+                    )
+                }
             ) {
                 Icon(
                     imageVector = Icons.Rounded.Check,
@@ -83,7 +88,7 @@ fun NewTaskStackForm(navController: NavHostController, taskList: MutableList<Str
             Button(
                 modifier = Modifier.padding(16.dp),
                 onClick = {
-                    navController.navigate(Screen.Home.route){
+                    navController.navigate(Screen.Home.route) {
                         popUpTo("home") { inclusive = true }
                     }
                 }
