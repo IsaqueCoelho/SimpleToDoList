@@ -40,11 +40,11 @@ fun GridViewComponent(
 @Composable
 fun PreviewGridView() {
     val fakeGroupList = listOf(
-        Group(name = "Personal", taskList = emptyList()),
-        Group(name = "Home", taskList = emptyList()),
-        Group(name = "Work", taskList = emptyList()),
-        Group(name = "University", taskList = emptyList()),
-        Group(name = "Study", taskList = emptyList())
+        Group(name = "Personal", tasks = emptyList()),
+        Group(name = "Home", tasks = emptyList()),
+        Group(name = "Work", tasks = emptyList()),
+        Group(name = "University", tasks = emptyList()),
+        Group(name = "Study", tasks = emptyList())
     )
     val navController = rememberNavController()
 

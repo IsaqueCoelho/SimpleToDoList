@@ -1,6 +1,5 @@
 package com.studio.sevenapp.todolist.screencontent
 
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
@@ -11,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -23,7 +23,7 @@ import com.studio.sevenapp.todolist.model.Group
 import com.studio.sevenapp.todolist.ui.theme.TODoListTheme
 
 @Composable
-fun GroupTaskStackContent(navController: NavHostController, groupId: String){
+fun GroupTaskStackContent(navController: NavHostController, groupId: String) {
 
     val viewModel: GroupTaskViewModel = viewModel()
     viewModel.getGroupById(groupId = groupId)
@@ -37,7 +37,7 @@ fun GroupTaskStackContent(navController: NavHostController, groupId: String){
                     .background(MaterialTheme.colors.primary)
                     .padding(26.dp),
                 textAlign = TextAlign.Center,
-                text = "Create new task stack",
+                text = "Stack app",
                 color = Color.White
             )
         },
@@ -68,8 +68,16 @@ fun TaskListContent(group: Group) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = group.name)
-        TaskItemList(taskList = group.taskList)
+        Text(
+            modifier = Modifier
+                .wrapContentWidth()
+                .padding(16.dp),
+            text = group.name,
+            style = MaterialTheme.typography.body1,
+            fontWeight = FontWeight.Bold
+        )
+
+        TaskItemList(taskList = group.tasks)
     }
 }
 
