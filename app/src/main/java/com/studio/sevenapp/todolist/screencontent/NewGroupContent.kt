@@ -16,6 +16,8 @@ import com.studio.sevenapp.todolist.ui.theme.TODoListTheme
 
 @Composable
 fun NewGroupContent(navController: NavHostController) {
+    var groupName by remember { mutableStateOf("") }
+
     Scaffold(
         topBar = {
             Text(
@@ -34,11 +36,10 @@ fun NewGroupContent(navController: NavHostController) {
                 modifier = Modifier.fillMaxSize(),
                 verticalArrangement = Arrangement.Center
             ) {
-                var text by remember { mutableStateOf("") }
 
                 TextField(
-                    value = text,
-                    onValueChange = { text = it },
+                    value = groupName,
+                    onValueChange = { groupName = it },
                     label = {
                         Text(
                             text = "Qual o nome desse grupo",
@@ -57,7 +58,11 @@ fun NewGroupContent(navController: NavHostController) {
             ) {
                 Button(
                     modifier = Modifier.padding(16.dp),
-                    onClick = { navController.navigate(Screen.NewTask.route) }
+                    onClick = {
+                        navController.navigate(
+                            Screen.NewTask.createRoute(groupName)
+                        )
+                    }
                 ) {
                     Text(text = "Avançar")
                 }

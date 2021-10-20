@@ -23,8 +23,10 @@ fun NavigationGraph() {
         composable(route = Screen.NewGroup.route) {
             NewGroupContent(navController = navController)
         }
-        composable(route = Screen.NewTask.route){
-            NewTaskStackContent(navController = navController)
+        composable(route = Screen.NewTask.route){ backStackEntry ->
+            val groupName = backStackEntry.arguments?.getString("group_name")
+            requireNotNull(groupName) { "Group Name parameter wasn't found. Please make sure it's set!" }
+            NewTaskStackContent(navController = navController, groupName)
         }
     }
 }

@@ -19,7 +19,7 @@ import com.studio.sevenapp.todolist.ui.theme.TODoListTheme
 import com.studio.sevenapp.todolist.ui.theme.Teal200
 
 @Composable
-fun NewTaskStackContent(navController: NavHostController) {
+fun NewTaskStackContent(navController: NavHostController, groupName: String) {
 
     val taskList: MutableList<String> = mutableListOf()
 
@@ -32,7 +32,7 @@ fun NewTaskStackContent(navController: NavHostController) {
                     .background(MaterialTheme.colors.primary)
                     .padding(26.dp),
                 textAlign = TextAlign.Center,
-                text = "Create new stack",
+                text = "Create new task stack",
                 color = Color.White
             )
         },
@@ -101,6 +101,6 @@ fun NewTaskStackForm(navController: NavHostController, taskList: MutableList<Str
 fun PreviewNewTaskStackContent() {
     TODoListTheme {
         val navController = rememberNavController()
-        NewTaskStackContent(navController)
+        NewTaskStackContent(navController, "PGroup Name")
     }
 }
