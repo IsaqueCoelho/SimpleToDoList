@@ -11,6 +11,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.studio.sevenapp.todolist.navigations.Screen
 import com.studio.sevenapp.todolist.ui.theme.TODoListTheme
 
 @Composable
@@ -56,7 +57,7 @@ fun NewGroupContent(navController: NavHostController) {
             ) {
                 Button(
                     modifier = Modifier.padding(16.dp),
-                    onClick = { /*TODO*/ }
+                    onClick = { navController.navigate(Screen.NewTask.route) }
                 ) {
                     Text(text = "Avançar")
                 }

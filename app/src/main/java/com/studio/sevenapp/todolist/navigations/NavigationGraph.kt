@@ -7,6 +7,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.studio.sevenapp.todolist.screencontent.HomeContent
 import com.studio.sevenapp.todolist.screencontent.NewGroupContent
+import com.studio.sevenapp.todolist.screencontent.NewTaskStackContent
 
 @ExperimentalFoundationApi
 @Composable
@@ -21,6 +22,9 @@ fun NavigationGraph() {
         }
         composable(route = Screen.NewGroup.route) {
             NewGroupContent(navController = navController)
+        }
+        composable(route = Screen.NewTask.route){
+            NewTaskStackContent(navController = navController)
         }
     }
 }

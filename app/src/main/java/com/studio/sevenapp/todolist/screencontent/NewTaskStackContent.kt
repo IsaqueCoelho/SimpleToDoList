@@ -82,7 +82,11 @@ fun NewTaskStackForm(navController: NavHostController, taskList: MutableList<Str
             }
             Button(
                 modifier = Modifier.padding(16.dp),
-                onClick = { navController.popBackStack(Screen.Home.route, inclusive = true) }
+                onClick = {
+                    navController.navigate(Screen.Home.route){
+                        popUpTo("home") { inclusive = true }
+                    }
+                }
             ) {
                 Text(text = "salvar")
             }
