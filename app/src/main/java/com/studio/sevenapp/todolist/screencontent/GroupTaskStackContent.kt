@@ -1,15 +1,14 @@
 package com.studio.sevenapp.todolist.screencontent
 
+import android.util.Log
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
@@ -29,8 +28,6 @@ fun GroupTaskStackContent(navController: NavHostController, groupId: String){
     val viewModel: GroupTaskViewModel = viewModel()
     viewModel.getGroupById(groupId = groupId)
 
-    val group = viewModel.groupByIdMS
-
     Scaffold(
         topBar = {
             Text(
@@ -45,16 +42,22 @@ fun GroupTaskStackContent(navController: NavHostController, groupId: String){
             )
         },
         content = {
+            val group = viewModel.groupByIdMS
             group.value?.let {
                 TaskListContent(it)
             }
         },
         bottomBar = {
-            Button(
-                modifier = Modifier.padding(16.dp),
-                onClick = { navController.popBackStack() }
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center
             ) {
-                Text(text = "voltar")
+                Button(
+                    modifier = Modifier.padding(16.dp),
+                    onClick = { navController.popBackStack() }
+                ) {
+                    Text(text = "voltar")
+                }
             }
         }
     )
@@ -62,7 +65,9 @@ fun GroupTaskStackContent(navController: NavHostController, groupId: String){
 
 @Composable
 fun TaskListContent(group: Group) {
-    Column {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
         Text(text = group.name)
         TaskItemList(taskList = group.taskList)
     }

@@ -46,7 +46,8 @@ class GroupTaskViewModel : ViewModel() {
             .document(groupId)
             .get()
             .addOnSuccessListener { result ->
-                groupByIdMS.value = result.toObject<Group>()
+                val group = result.toObject<Group>()
+                groupByIdMS.value = group
             }
             .addOnFailureListener { exception ->
                 Log.e("HomeContent", "Error getting documents.", exception)

@@ -1,6 +1,7 @@
 package com.studio.sevenapp.todolist.navigations
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -10,6 +11,7 @@ import com.studio.sevenapp.todolist.screencontent.HomeContent
 import com.studio.sevenapp.todolist.screencontent.NewGroupContent
 import com.studio.sevenapp.todolist.screencontent.NewTaskStackContent
 
+@ExperimentalMaterialApi
 @ExperimentalFoundationApi
 @Composable
 fun NavigationGraph() {
