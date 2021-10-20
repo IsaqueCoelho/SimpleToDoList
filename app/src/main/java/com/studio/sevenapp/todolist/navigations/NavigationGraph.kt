@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.studio.sevenapp.todolist.screencontent.GroupTaskStackContent
 import com.studio.sevenapp.todolist.screencontent.HomeContent
 import com.studio.sevenapp.todolist.screencontent.NewGroupContent
 import com.studio.sevenapp.todolist.screencontent.NewTaskStackContent
@@ -27,6 +28,11 @@ fun NavigationGraph() {
             val groupName = backStackEntry.arguments?.getString("group_name")
             requireNotNull(groupName) { "Group Name parameter wasn't found. Please make sure it's set!" }
             NewTaskStackContent(navController = navController, groupName)
+        }
+        composable(route = Screen.Group.route){ backStackEntry ->
+            val groupId = backStackEntry.arguments?.getString("group_id")
+            requireNotNull(groupId) { "Group Name parameter wasn't found. Please make sure it's set!" }
+            GroupTaskStackContent(navController = navController, groupId)
         }
     }
 }

@@ -22,6 +22,7 @@ import com.studio.sevenapp.todolist.components.GridViewComponent
 import com.studio.sevenapp.todolist.navigations.Screen
 import com.studio.sevenapp.todolist.ui.theme.TODoListTheme
 
+@ExperimentalMaterialApi
 @ExperimentalFoundationApi
 @Composable
 fun HomeContent(navController: NavHostController) {
@@ -58,11 +59,15 @@ fun HomeContent(navController: NavHostController) {
         floatingActionButtonPosition = FabPosition.End,
         content = {
             val groupList = viewModel.groupListMS.value
-            GridViewComponent(groupList)
+            GridViewComponent(
+                navController = navController,
+                groupList = groupList
+            )
         }
     )
 }
 
+@ExperimentalMaterialApi
 @ExperimentalFoundationApi
 @Preview(showBackground = true)
 @Composable
