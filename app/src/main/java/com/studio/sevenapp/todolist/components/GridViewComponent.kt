@@ -6,18 +6,19 @@ import androidx.compose.foundation.lazy.LazyVerticalGrid
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import com.studio.sevenapp.todolist.model.Group
 
 @ExperimentalFoundationApi
 @Composable
 fun GridViewComponent(
-    stringList: List<String>
+    groupList: List<Group>
 ) {
     LazyVerticalGrid(
         cells = GridCells.Fixed(2),
         content = {
-            items(items = stringList, itemContent = {
+            items(items = groupList, itemContent = {
                 GroupTask(
-                    text = it
+                    text = it.name
                 )
             })
         }
@@ -30,6 +31,12 @@ fun GridViewComponent(
 )
 @Composable
 fun PreviewGridView() {
-    val stringList = listOf("Personal", "Home", "Work", "University", "Study")
-    GridViewComponent(stringList = stringList)
+    val fakeGroupList = listOf(
+        Group(name = "Personal", taskList = emptyList()),
+        Group(name = "Home", taskList = emptyList()),
+        Group(name = "Work", taskList = emptyList()),
+        Group(name = "University", taskList = emptyList()),
+        Group(name = "Study", taskList = emptyList())
+    )
+    GridViewComponent(groupList = fakeGroupList)
 }

@@ -14,8 +14,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.studio.sevenapp.todolist.GroupTaskViewModel
 import com.studio.sevenapp.todolist.components.GridViewComponent
 import com.studio.sevenapp.todolist.navigations.Screen
 import com.studio.sevenapp.todolist.ui.theme.TODoListTheme
@@ -23,6 +25,9 @@ import com.studio.sevenapp.todolist.ui.theme.TODoListTheme
 @ExperimentalFoundationApi
 @Composable
 fun HomeContent(navController: NavHostController) {
+
+    val viewModel: GroupTaskViewModel = viewModel()
+
     Scaffold(
         topBar = {
             Text(
@@ -52,7 +57,8 @@ fun HomeContent(navController: NavHostController) {
         },
         floatingActionButtonPosition = FabPosition.End,
         content = {
-            GridViewComponent(emptyList())
+            val groupList = viewModel.groupListMS.value
+            GridViewComponent(groupList)
         }
     )
 }
