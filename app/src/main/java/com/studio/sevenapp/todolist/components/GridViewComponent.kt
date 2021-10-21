@@ -23,7 +23,7 @@ fun GridViewComponent(
         content = {
             items(items = groupList, itemContent = {
                 GroupTask(
-                    groupId = it.id,
+                    groupId = it.id!!,
                     text = it.name,
                     navController = navController
                 )

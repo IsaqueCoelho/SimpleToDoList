@@ -18,6 +18,8 @@ class GroupTaskViewModel : ViewModel() {
     val groupByIdMS = mutableStateOf<Group?>(null)
     val taskListMS = mutableStateOf<List<Task>>(listOf())
 
+    val mustPopBackStack = mutableStateOf<Boolean>(false)
+
     private val db = Firebase.firestore
 
     init {
@@ -59,6 +61,17 @@ class GroupTaskViewModel : ViewModel() {
 
     fun addNewTask(task: SnapshotStateList<Task>) {
         taskListMS.value = task.toList()
+    }
+
+    fun addNewGroup(group: Group){
+        db.collection("stack")
+            .add(group)
+            .addOnSuccessListener { documentReference ->
+                mustPopBackStack.value = true
+            }
+            .addOnFailureListener { e ->
+                mustPopBackStack.value = true
+            }
     }
 
 }

@@ -17,6 +17,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.studio.sevenapp.todolist.GroupTaskViewModel
 import com.studio.sevenapp.todolist.components.TaskItemList
+import com.studio.sevenapp.todolist.model.Group
 import com.studio.sevenapp.todolist.model.Task
 import com.studio.sevenapp.todolist.navigations.Screen
 import com.studio.sevenapp.todolist.ui.theme.TODoListTheme
@@ -27,6 +28,13 @@ fun NewTaskStackContent(navController: NavHostController, groupName: String) {
 
     val viewModel: GroupTaskViewModel = viewModel()
     val taskList = remember { mutableStateListOf<Task>() }
+    val navigateBack = viewModel.mustPopBackStack.value
+
+    if(navigateBack){
+        navController.navigate(Screen.Home.route) {
+            popUpTo("home") { inclusive = true }
+        }
+    }
 
     Scaffold(
         topBar = {
@@ -49,17 +57,20 @@ fun NewTaskStackContent(navController: NavHostController, groupName: String) {
             NewTaskStackForm(
                 navController = navController,
                 taskList = taskList,
-                viewModel = viewModel
+                viewModel = viewModel,
+                groupName = groupName
             )
         }
     )
+
 }
 
 @Composable
 fun NewTaskStackForm(
     navController: NavHostController,
     taskList: SnapshotStateList<Task>,
-    viewModel: GroupTaskViewModel
+    viewModel: GroupTaskViewModel,
+    groupName: String
 ) {
     Column {
         Row(
@@ -106,9 +117,12 @@ fun NewTaskStackForm(
             Button(
                 modifier = Modifier.padding(16.dp),
                 onClick = {
-                    navController.navigate(Screen.Home.route) {
-                        popUpTo("home") { inclusive = true }
-                    }
+                    viewModel.addNewGroup(
+                        Group(
+                            name = groupName,
+                            tasks = taskList.toList()
+                        )
+                    )
                 }
             ) {
                 Text(text = "salvar")
