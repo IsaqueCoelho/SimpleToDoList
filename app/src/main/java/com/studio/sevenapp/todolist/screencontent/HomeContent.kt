@@ -28,6 +28,8 @@ import com.studio.sevenapp.todolist.ui.theme.TODoListTheme
 fun HomeContent(navController: NavHostController) {
 
     val viewModel: GroupTaskViewModel = viewModel()
+    val groupList = viewModel.groupListMS.value
+    viewModel.getGroup()
 
     Scaffold(
         topBar = {
@@ -58,7 +60,6 @@ fun HomeContent(navController: NavHostController) {
         },
         floatingActionButtonPosition = FabPosition.End,
         content = {
-            val groupList = viewModel.groupListMS.value
             GridViewComponent(
                 navController = navController,
                 groupList = groupList

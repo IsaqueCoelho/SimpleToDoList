@@ -28,13 +28,6 @@ fun NewTaskStackContent(navController: NavHostController, groupName: String) {
 
     val viewModel: GroupTaskViewModel = viewModel()
     val taskList = remember { mutableStateListOf<Task>() }
-    val navigateBack = viewModel.mustPopBackStack.value
-
-    if(navigateBack){
-        navController.navigate(Screen.Home.route) {
-            popUpTo("home") { inclusive = true }
-        }
-    }
 
     Scaffold(
         topBar = {
@@ -123,6 +116,9 @@ fun NewTaskStackForm(
                             tasks = taskList.toList()
                         )
                     )
+                    navController.navigate(Screen.Home.route) {
+                        popUpTo("home") { inclusive = true }
+                    }
                 }
             ) {
                 Text(text = "salvar")
