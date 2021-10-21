@@ -6,13 +6,16 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Check
 import androidx.compose.runtime.*
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.studio.sevenapp.todolist.GroupTaskViewModel
 import com.studio.sevenapp.todolist.components.TaskItemList
 import com.studio.sevenapp.todolist.model.Task
 import com.studio.sevenapp.todolist.navigations.Screen
@@ -22,7 +25,8 @@ import com.studio.sevenapp.todolist.ui.theme.Teal200
 @Composable
 fun NewTaskStackContent(navController: NavHostController, groupName: String) {
 
-    val taskList: MutableList<Task> = mutableListOf()
+    val viewModel: GroupTaskViewModel = viewModel()
+    val taskList = remember { mutableStateListOf<Task>() }
 
     Scaffold(
         topBar = {
@@ -38,16 +42,25 @@ fun NewTaskStackContent(navController: NavHostController, groupName: String) {
             )
         },
         content = {
-            TaskItemList(taskList = taskList)
+            val newTaskList = viewModel.taskListMS.value
+            TaskItemList(taskList = newTaskList)
         },
         bottomBar = {
-            NewTaskStackForm(navController = navController, taskList = taskList)
+            NewTaskStackForm(
+                navController = navController,
+                taskList = taskList,
+                viewModel = viewModel
+            )
         }
     )
 }
 
 @Composable
-fun NewTaskStackForm(navController: NavHostController, taskList: MutableList<Task>) {
+fun NewTaskStackForm(
+    navController: NavHostController,
+    taskList: SnapshotStateList<Task>,
+    viewModel: GroupTaskViewModel
+) {
     Column {
         Row(
             Modifier.fillMaxWidth(),
@@ -63,8 +76,13 @@ fun NewTaskStackForm(navController: NavHostController, taskList: MutableList<Tas
 
             IconButton(
                 onClick = {
+
                     taskList.add(
                         Task(name = text)
+                    )
+
+                    viewModel.addNewTask(
+                        taskList
                     )
                 }
             ) {

@@ -2,18 +2,21 @@ package com.studio.sevenapp.todolist
 
 import android.util.Log
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import com.studio.sevenapp.todolist.model.Group
+import com.studio.sevenapp.todolist.model.Task
 import kotlinx.coroutines.launch
 
 class GroupTaskViewModel : ViewModel() {
 
     val groupListMS = mutableStateOf<List<Group>>(listOf())
     val groupByIdMS = mutableStateOf<Group?>(null)
+    val taskListMS = mutableStateOf<List<Task>>(listOf())
 
     private val db = Firebase.firestore
 
@@ -41,7 +44,7 @@ class GroupTaskViewModel : ViewModel() {
             }
     }
 
-    fun getGroupById(groupId: String){
+    fun getGroupById(groupId: String) {
         db.collection("stack")
             .document(groupId)
             .get()
@@ -52,6 +55,10 @@ class GroupTaskViewModel : ViewModel() {
             .addOnFailureListener { exception ->
                 Log.e("HomeContent", "Error getting documents.", exception)
             }
+    }
+
+    fun addNewTask(task: SnapshotStateList<Task>) {
+        taskListMS.value = task.toList()
     }
 
 }
