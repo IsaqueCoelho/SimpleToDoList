@@ -1,10 +1,10 @@
 ## Simple To Do List
 
-:en:
+:us:
 In order to improve my knowledge on jetpack compose and navigations with compose this simple to do list app was created
 
 
-:br:
+🇧🇷
 Para melhorar meus conhecimentos em jetpack compose e navigations com compose esse simples app de to do list foi criado
 
 
